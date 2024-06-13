@@ -2,6 +2,6 @@
   <div>home</div>
 </template>
 
-<script>
+<script setup lang="ts">
 console.log('home');
 </script>

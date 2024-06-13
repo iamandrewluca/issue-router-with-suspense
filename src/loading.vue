@@ -2,6 +2,6 @@
   <div>loading...</div>
 </template>
 
-<script>
+<script setup lang="ts">
 console.log('loading...');
 </script>

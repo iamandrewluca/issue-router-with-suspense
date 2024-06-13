@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { RouterView, RouterLink, useRoute } from 'vue-router';
-import Loading from './loading.vue';
+import { Suspense } from "vue";
+import { RouterView, RouterLink, useRoute } from "vue-router";
+import Loading from "./loading.vue";
 const route = useRoute();
 </script>
 
@@ -20,12 +21,16 @@ const route = useRoute();
         <RouterLink to="/zxc">/zxc</RouterLink>
       </li>
     </ul>
-    <div>Param: {{ route.params.id ?? 'no' }}</div>
-    <Suspense>
-      <RouterView />
-      <template #fallback>
-        <Loading />
-      </template>
-    </Suspense>
+    <div>Param: {{ route.params.id ?? "no" }}</div>
+    <RouterView v-slot="{ Component, route }">
+      <Suspense :timeout="0">
+        <template #default>
+          <component :is="Component" :key="route.params.id" />
+        </template>
+        <template #fallback>
+          <Loading />
+        </template>
+      </Suspense>
+    </RouterView>
   </div>
 </template>
